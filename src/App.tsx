@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Grid, IconButton, Paper, Typography } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import img1 from "./Assets/2.jpg"
-import img2 from "./Assets/7.jpg"
-import img3 from "./Assets/4.jpg"
-import img4 from "./Assets/5.jpg"
-import img5 from "./Assets/6.jpg"
+import img1 from "./Assets/2.jpg";
+import img2 from "./Assets/7.jpg";
+import img3 from "./Assets/4.jpg";
+import img4 from "./Assets/5.jpg";
+import img5 from "./Assets/6.jpg";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import Navbar from "./component/Navbar/Navbar";
@@ -51,9 +51,9 @@ const images: Image[] = [
 ];
 
 function App() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
   const darkTheme = createTheme({
     palette: {
       mode: darkMode ? "dark" : "light",
@@ -64,17 +64,17 @@ function App() {
   });
   useEffect(() => {
     let timer: number;
-
     if (isPlaying) {
       timer = window.setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
       }, 3000);
     }
-
     return () => {
       window.clearInterval(timer);
     };
   }, [isPlaying]);
+
+  
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
@@ -94,6 +94,7 @@ function App() {
   const handlePlayPause = () => {
     setIsPlaying((prevIsPlaying) => !prevIsPlaying);
   };
+  
   return (
     <div className="App">
       <ThemeProvider theme={darkTheme}>
@@ -103,7 +104,7 @@ function App() {
             <Grid
               style={{ minHeight: "100vh" }}
               container
-              spacing={2} // Adjust the spacing value as per your preference
+              spacing={2}
             >
               {/* Row -1 */}
               <Grid
@@ -214,7 +215,7 @@ function App() {
                         />
                       </Grid>
                     ))}
-                    <Grid   item xs={1}>
+                    <Grid item xs={1}>
                       <IconButton
                         style={{
                           backgroundColor: darkMode ? "white" : "#1976d2",
@@ -233,7 +234,7 @@ function App() {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    margin:"auto"
+                    margin: "auto",
                   }}
                   item
                   md={5}
@@ -249,19 +250,25 @@ function App() {
                 >
                   <IconButton onClick={handlePlayPause}>
                     {isPlaying ? (
-                      <PauseCircleIcon
-                        style={{
-                          color: darkMode ? "white" : "#121212",
-                          fontSize: "120px",
-                        }}
-                      />
+                      <>
+                        <PauseCircleIcon
+                          style={{
+                            color: darkMode ? "white" : "#121212",
+                            fontSize: "120px",
+                          }}
+                        />
+                        Pause
+                      </>
                     ) : (
-                      <PlayCircleFilledWhiteIcon
-                        style={{
-                          color: darkMode ? "white" : "#121212",
-                          fontSize: "120px",
-                        }}
-                      />
+                      <>
+                        <PlayCircleFilledWhiteIcon
+                          style={{
+                            color: darkMode ? "white" : "#121212",
+                            fontSize: "120px",
+                          }}
+                        />
+                        Play
+                      </>
                     )}
                   </IconButton>
                 </Grid>
